@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.lucashenrique.workshopspring.Services.exception.ObjectNotFoundException;
 import com.lucashenrique.workshopspring.domain.User;
+import com.lucashenrique.workshopspring.dto.UserDTO;
 import com.lucashenrique.workshopspring.repository.UserRepository;
 
 @Service
@@ -23,5 +24,13 @@ public class UserServices {
         Optional<User> obj = repo.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 
+    }
+
+    public User insert(User obj) {
+        return repo.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDto) {
+        return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }
 }
